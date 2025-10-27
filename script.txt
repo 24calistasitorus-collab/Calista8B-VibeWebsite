@@ -1,0 +1,89 @@
+// Tunggu hingga seluruh konten HTML selesai dimuat
+document.addEventListener('DOMContentLoaded', () => {
+    
+    // ===================================
+    // 1. Mobile Menu Toggle Functionality
+    // ===================================
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navbar = document.querySelector('.navbar');
+
+    menuToggle.addEventListener('click', () => {
+        // Toggle class 'active' pada navbar untuk menampilkan/menyembunyikannya (CSS handles display: flex/none)
+        navbar.classList.toggle('active');
+        
+        // Mengubah ikon dari 'bars' menjadi 'times' (silang) saat menu terbuka
+        const icon = menuToggle.querySelector('i');
+        if (navbar.classList.contains('active')) {
+            icon.classList.remove('fa-bars');
+            icon.classList.add('fa-times'); // Ikon silang (X)
+        } else {
+            icon.classList.remove('fa-times');
+            icon.classList.add('fa-bars'); // Ikon garis tiga
+        }
+    });
+
+    // Menutup menu saat link di-klik (berguna untuk navigasi single-page)
+    document.querySelectorAll('.navbar a').forEach(link => {
+        link.addEventListener('click', () => {
+            // Hanya berlaku jika lebar layar kurang dari atau sama dengan 768px (Mobile/Tablet)
+            if (window.innerWidth <= 768) {
+                navbar.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('fa-times');
+                menuToggle.querySelector('i').classList.add('fa-bars');
+            }
+        });
+    });
+    
+    // ===================================
+    // 2. Add to Cart Placeholder & Animation
+    // ===================================
+    const cartButtons = document.querySelectorAll('.add-to-cart-btn');
+
+    cartButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            // Mencegah event klik memicu event lain pada parent element (misalnya link)
+            event.stopPropagation();
+            
+            const card = event.target.closest('.dessert-card');
+            const dessertName = card.getAttribute('data-name');
+            
+            // Animasi feedback: Tombol berubah menjadi 'Added'
+            const originalHTML = button.innerHTML;
+            const originalBG = button.style.backgroundColor;
+            
+            button.innerHTML = '<i class="fas fa-check"></i> Added!';
+            button.style.backgroundColor = '#25d366'; // Warna hijau (mirip WhatsApp) untuk konfirmasi
+            button.style.transform = 'scale(1.05)';
+            button.disabled = true;
+
+            // Kembalikan tombol ke keadaan semula setelah 1.5 detik
+            setTimeout(() => {
+                button.innerHTML = originalHTML; // Kembali ke "<i class='fas fa-plus'></i> Add to Cart"
+                button.style.backgroundColor = '#e0ac5b'; // Kembali ke warna Soft Gold
+                button.style.transform = 'scale(1)';
+                button.disabled = false;
+            }, 1500);
+
+            console.log(`${dessertName} added to cart!`);
+            // Di sini Anda akan menambahkan logika sebenarnya untuk keranjang belanja (AJAX/State Management)
+        });
+    });
+    
+    // ===================================
+    // 3. Header Scroll Effect (Opsional, untuk menambahkan nuansa elegan)
+    // ===================================
+    const header = document.querySelector('.header');
+    
+    window.addEventListener('scroll', () => {
+        // Tambahkan shadow pada header saat di-scroll ke bawah
+        if (window.scrollY > 50) {
+            header.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+        } else {
+            // Hapus shadow saat kembali ke atas halaman
+            header.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.05)';
+        }
+    });
+
+    // Catatan: Efek zoom in/out gambar diatur sepenuhnya oleh CSS (:hover) 
+    // pada selector .dessert-card:hover .dessert-image dan .dessert-image.
+});

@@ -1,0 +1,402 @@
+/* style.css */
+
+/* General Reset and Base Styles (KEEP AS IS) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+    background-color: #f7f3ed; /* Soft, creamy background */
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s ease;
+}
+
+/* Color Palette:
+    Primary: #9f6060 (Dusty Rose/Brown)
+    Accent: #e0ac5b (Soft Gold/Caramel)
+    Text: #333
+    Background: #f7f3ed (Cream/Beige)
+    Secondary Accent for Hero Overlay: #d6b38c (Lighter Caramel)
+*/
+
+/* Header & Navigation (KEEP AS IS) */
+.header {
+    background-color: #ffffff;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #9f6060; /* Dusty Rose/Brown */
+    letter-spacing: 1px;
+    animation: logoFadeIn 1s ease-out; /* Startup animation */
+}
+
+@keyframes logoFadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.navbar a {
+    margin-left: 25px;
+    font-weight: 500;
+    position: relative;
+}
+
+.navbar a:hover {
+    color: #e0ac5b; /* Soft Gold */
+}
+
+.navbar a::after { /* Underline animation */
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    right: 0;
+    background: #e0ac5b;
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+    left: 0;
+    background: #e0ac5b;
+}
+
+.cart-icon {
+    font-size: 1.2em;
+}
+
+.menu-toggle {
+    font-size: 1.5em;
+    cursor: pointer;
+    display: none; /* Hide on desktop */
+}
+
+/* Hero Section - UPDATED */
+.hero-section {
+    height: 90vh; /* Make it a bit taller */
+    background: url('https://images.unsplash.com/photo-1587327891786-0570b5d91e60?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover; /* Gambar dessert mewah */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden; /* Ensure no overflow from parallax */
+}
+
+.hero-section::before { /* GRADIENT OVERLAY */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(159, 96, 96, 0.4) 50%, rgba(224, 172, 91, 0.4) 100%); /* Darker top, blending to Dusty Rose and Soft Gold */
+    z-index: 0; /* Ensure it's below content but above image */
+}
+
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px; /* Slightly wider for more impact */
+    animation: fadeInSlideUp 1.2s ease-out 0.5s forwards; /* New animation */
+    opacity: 0;
+    transform: translateY(30px);
+    padding: 20px; /* Add some padding */
+}
+
+@keyframes fadeInSlideUp {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.2em; /* Bigger, bolder title */
+    margin-bottom: 15px;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6); /* Stronger shadow for readability */
+    line-height: 1.1;
+    color: #fff; /* Keep title white for contrast */
+}
+
+.hero-content p {
+    font-size: 1.4em; /* Larger paragraph text */
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    color: #eee; /* Slightly off-white for subtitle */
+}
+
+.cta-button {
+    background-color: #e0ac5b; /* Soft Gold for CTA */
+    color: white;
+    padding: 15px 35px; /* Bigger button */
+    border-radius: 8px; /* Slightly more rounded */
+    font-weight: 700; /* Bolder text */
+    font-size: 1.1em;
+    display: inline-flex; /* For icon alignment */
+    align-items: center;
+    gap: 10px; /* Space between text and icon */
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+.cta-button:hover {
+    background-color: #c4964e; /* Darker gold on hover */
+    transform: translateY(-5px) scale(1.02); /* More pronounced lift */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Dessert Menu (KEEP AS IS) */
+.dessert-menu {
+    padding: 50px 5%;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5em;
+    color: #9f6060;
+    margin-bottom: 40px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: #e0ac5b;
+    margin: 10px auto 0;
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Dessert Card Styling & Zoom Effect (KEEP AS IS) */
+.dessert-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.dessert-card:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px); /* Lift card slightly */
+}
+
+.dessert-image {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    transition: transform 0.5s ease; /* Transition for zoom effect */
+}
+
+/* Zoom Effect: Hover over the card */
+.dessert-card:hover .dessert-image {
+    transform: scale(1.1); /* Zoom in */
+}
+
+/* Zoom Effect: When not hovering (default state/zoom out) */
+.dessert-image {
+    transform: scale(1.0); /* Zoom out (default) */
+}
+
+.card-body {
+    padding: 20px;
+    text-align: left;
+}
+
+.card-body h3 {
+    font-family: 'Playfair Display', serif;
+    color: #9f6060;
+    margin-bottom: 5px;
+}
+
+.card-body p {
+    color: #666;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #e0ac5b;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.add-to-cart-btn {
+    background-color: #e0ac5b;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #c4964e;
+}
+
+/* Footer (KEEP AS IS) */
+.footer {
+    background-color: #333;
+    color: #f7f3ed;
+    padding: 30px 5%;
+    text-align: center;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.social-icons a {
+    color: white;
+    font-size: 1.5em;
+    margin: 0 10px;
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #e0ac5b;
+    transform: scale(1.1);
+}
+
+/* Mobile Responsive: Bottom CTA Button (KEEP AS IS) */
+.mobile-cta-btn {
+    display: none; /* Hide by default */
+    position: fixed;
+    bottom: 20px;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: #25d366; /* WhatsApp Green */
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-size: 1.1em;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    animation: pulse 2s infinite; /* Attractive animation */
+}
+
+@keyframes pulse {
+    0% { transform: scale(1) translateX(50%); }
+    50% { transform: scale(1.05) translateX(50%); }
+    100% { transform: scale(1) translateX(50%); }
+}
+
+/* ---------------------------------- */
+/* MEDIA QUERIES             */
+/* ---------------------------------- */
+
+@media (max-width: 768px) {
+    
+    /* Header/Nav for Mobile (KEEP AS IS) */
+    .navbar {
+        position: absolute;
+        top: 60px; /* Below header */
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        flex-direction: column;
+        display: none; /* Hidden by default, shown by JS */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding-bottom: 10px;
+    }
+
+    .navbar.active {
+        display: flex;
+    }
+
+    .navbar a {
+        margin: 10px 0;
+        padding: 10px 5%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .menu-toggle {
+        display: block; /* Show menu icon on mobile */
+    }
+
+    /* Hero Section Adjustments for Mobile */
+    .hero-content h1 {
+        font-size: 3em; /* Slightly smaller for mobile */
+    }
+
+    .hero-content p {
+        font-size: 1.1em;
+    }
+
+    .cta-button {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+
+    /* Mobile CTA Button (KEEP AS IS) */
+    .mobile-cta-btn {
+        display: flex; /* Show the button on mobile */
+        align-items: center;
+    }
+    
+    .mobile-cta-btn i {
+        margin-right: 8px;
+        font-size: 1.3em;
+    }
+
+    /* Hide Cart Icon on Mobile Nav (keep only in header if needed) */
+    .navbar .cart-icon {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .menu-grid {
+        grid-template-columns: 1fr; /* Single column on very small screens */
+    }
+
+    .hero-content h1 {
+        font-size: 2.5em; /* Even smaller for very small screens */
+    }
+
+    .hero-content p {
+        font-size: 1em;
+    }
+}
